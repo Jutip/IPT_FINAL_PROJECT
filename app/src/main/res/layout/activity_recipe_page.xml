@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipePage">
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="400dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.139">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/chicken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#b64157"
+                android:text="Chicken" />
+
+            <Button
+                android:id="@+id/fish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#b64157"
+                android:text="Fish" />
+
+            <Button
+                android:id="@+id/pork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#b64157"
+                android:text="Pork" />
+
+            <Button
+                android:id="@+id/beef"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#b64157"
+                android:text="Beef" />
+
+            <Button
+                android:id="@+id/duck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#b64157"
+                android:text="Duck" />
+
+            <Button
+                android:id="@+id/vegestables"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#b64157"
+                android:text="Vegestables" />
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#b64157"
+                android:text="Desserts" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="412dp"
+        android:layout_height="624dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintVertical_bias="1.0">
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="2"
+            android:orientation="horizontal"
+            android:rowCount="8">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+
+            <ImageView
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true"
+                android:src="@drawable/chicken_adobo"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:background="@drawable/rounded" />
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chicken Adobo"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/c"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/d"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/s"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/e"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="4dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="Button" />
+        </GridLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended: "
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
