@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IPT_FINAL_PROJECT">
         <activity
+            android:name=".Chicken"
+            android:exported="false"/>
+        <activity
+            android:name=".ChickenAdobo"
+            android:exported="false"/>
+        <activity
             android:name=".RecipePage"
             android:exported="false" />
         <activity
