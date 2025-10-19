@@ -18,6 +18,27 @@
             android:name=".ChickenAdobo"
             android:exported="false"/>
         <activity
+            android:name=".Humba"
+            android:exported="false"/>
+        <activity
+            android:name=".Patotin"
+            android:exported="false"/>
+        <activity
+            android:name=".PataPorkBeans"
+            android:exported="false"/>
+        <activity
+            android:name=".Sisig"
+            android:exported="false"/>
+        <activity
+            android:name=".SinigangBangus"
+            android:exported="false"/>
+        <activity
+            android:name=".BicolExpress"
+            android:exported="false"/>
+        <activity
+            android:name=".GinaataangGulay"
+            android:exported="false"/>
+        <activity
             android:name=".RecipePage"
             android:exported="false" />
         <activity

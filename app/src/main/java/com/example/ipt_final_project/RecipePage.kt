@@ -14,16 +14,16 @@ import androidx.core.view.WindowCompat
 
 class RecipePage : AppCompatActivity() {
     lateinit var chickenAdobo: ImageView
-    lateinit var Sisig: ImageView
-    lateinit var GinaataangGulay: ImageView
-    lateinit var Humba: ImageView
-    lateinit var SinigangBangus: ImageView
-    lateinit var PataPorkBeans: ImageView
-    lateinit var BicolExpress: ImageView
-    lateinit var Patotin: ImageView
-    lateinit var Chicken: Button
+    lateinit var sisig: ImageView
+    lateinit var ginaataangGulay: ImageView
+    lateinit var humba: ImageView
+    lateinit var sinigangBangus: ImageView
+    lateinit var pataPorkBeans: ImageView
+    lateinit var bicolExpress: ImageView
+    lateinit var patotin: ImageView
+    lateinit var chicken: Button
     private lateinit var adapter: SearchItem
-    private val data = listOf("Chicken", "Pork", "Beef", "Fish", "Duck", "Vegestables", "Desserts")
+    private val data = listOf("Chicken", "Pork", "Beef", "Fish", "Duck", "Vegetables", "Desserts")
 
 
 
@@ -43,8 +43,8 @@ class RecipePage : AppCompatActivity() {
             startActivity(intent)
         }
 
-        Chicken = findViewById(R.id.chicken)
-        Chicken.setOnClickListener {
+        chicken = findViewById(R.id.chicken)
+        chicken.setOnClickListener {
             val intent = Intent(this, Chicken::class.java)
             startActivity(intent)
         }
@@ -55,44 +55,44 @@ class RecipePage : AppCompatActivity() {
             startActivity(intent)
         }
 
-        Sisig = findViewById(R.id.sisig)
-        Sisig.setOnClickListener {
+        sisig = findViewById(R.id.sisig)
+        sisig.setOnClickListener {
             val intent = Intent(this, Sisig::class.java)
             startActivity(intent)
         }
 
-        GinaataangGulay= findViewById(R.id.ginataangGulay)
-        GinaataangGulay.setOnClickListener {
+        ginaataangGulay= findViewById(R.id.ginataangGulay)
+        ginaataangGulay.setOnClickListener {
             val intent = Intent(this, GinaataangGulay::class.java)
             startActivity(intent)
         }
 
-        Humba = findViewById(R.id.humba)
-        Humba.setOnClickListener {
+        humba = findViewById(R.id.humba)
+        humba.setOnClickListener {
             val intent = Intent(this, Humba::class.java)
             startActivity(intent)
         }
 
-        SinigangBangus = findViewById(R.id.sinigangBangus)
-        SinigangBangus.setOnClickListener {
+        sinigangBangus = findViewById(R.id.sinigangBangus)
+        sinigangBangus.setOnClickListener {
             val intent = Intent(this, SinigangBangus::class.java)
             startActivity(intent)
         }
 
-        PataPorkBeans = findViewById(R.id.pata)
-        PataPorkBeans.setOnClickListener {
+        pataPorkBeans = findViewById(R.id.pata)
+        pataPorkBeans.setOnClickListener {
             val intent = Intent(this, PataPorkBeans::class.java)
             startActivity(intent)
         }
 
-        BicolExpress = findViewById(R.id.bicol)
-        BicolExpress.setOnClickListener {
+        bicolExpress = findViewById(R.id.bicol)
+        bicolExpress.setOnClickListener {
             val intent = Intent(this, BicolExpress::class.java)
             startActivity(intent)
         }
 
-        Patotin = findViewById(R.id.patotin)
-        Patotin.setOnClickListener {
+        patotin = findViewById(R.id.patotin)
+        patotin.setOnClickListener {
             val intent = Intent(this, Patotin::class.java)
             startActivity(intent)
         }
