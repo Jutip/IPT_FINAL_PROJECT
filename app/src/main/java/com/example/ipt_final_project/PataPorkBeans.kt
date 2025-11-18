@@ -2,20 +2,24 @@ package com.example.ipt_final_project
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 
 class PataPorkBeans : AppCompatActivity() {
-
-    lateinit var back6: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_ppb)
 
-        back6 = findViewById(R.id.back6)
-        back6.setOnClickListener {
+        val ppb= findViewById<TextView>(R.id.ppb_details)
+
+        val ppbHtml = getString(R.string.pata_pork_and_beans_details)
+        ppb.text = HtmlCompat.fromHtml(ppbHtml, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+        val backButton = findViewById<Button>(R.id.back)
+        backButton.setOnClickListener {
             val intent = Intent(this, RecipePage::class.java)
             startActivity(intent)
         }

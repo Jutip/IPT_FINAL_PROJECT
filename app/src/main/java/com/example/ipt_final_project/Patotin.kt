@@ -2,20 +2,24 @@ package com.example.ipt_final_project
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 
 class Patotin : AppCompatActivity() {
-
-    lateinit var back5: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_patotin)
 
-        back5 = findViewById(R.id.back5)
-        back5.setOnClickListener {
+        val pa= findViewById<TextView>(R.id.pa_details)
+
+        val paHtml = getString(R.string.patotin_details)
+        pa.text = HtmlCompat.fromHtml(paHtml, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+        val backButton = findViewById<Button>(R.id.back)
+        backButton.setOnClickListener {
             val intent = Intent(this, RecipePage::class.java)
             startActivity(intent)
         }

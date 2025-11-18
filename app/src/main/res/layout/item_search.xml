@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemButton"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/searchItem"
-    android:padding="16dp"
-    android:textSize="18sp"
+    android:text="Sample"
     android:textColor="@android:color/black"
-    android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true"
-    android:ellipsize="end"
-    android:singleLine="true"/>
-
+    android:padding="12dp"
+    android:layout_margin="6dp"
+    android:fontFamily="sans-serif-medium" />

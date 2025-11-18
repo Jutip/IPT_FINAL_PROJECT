@@ -1,6 +1,6 @@
 package com.example.ipt_final_project
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button

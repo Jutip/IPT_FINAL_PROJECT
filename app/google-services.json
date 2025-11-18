@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "56585157665",
-    "project_id": "recipe-1279c",
-    "storage_bucket": "recipe-1279c.firebasestorage.app"
+    "project_number": "803084564345",
+    "project_id": "recipe-9e875",
+    "storage_bucket": "recipe-9e875.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:56585157665:android:5776ca4da0af8073677760",
+        "mobilesdk_app_id": "1:803084564345:android:7e7b088829a204d67461a8",
         "android_client_info": {
           "package_name": "com.example.ipt_final_project"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBqfJeq0ySn5IANQNPu-MjDeGTYN09jNzc"
+          "current_key": "AIzaSyDCVcF0CEoybrEiykPbnh7i7tKaAfG-9xA"
         }
       ],
       "services": {
