@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="32dp"
+    android:background="#FFFFFF"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/logo_image_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="App Logo"
+        android:src="@drawable/tara_kaon2" />
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome Back!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#C85353"
+        android:layout_marginBottom="40dp"/>
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:hint="Username or Email"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="16sp" />
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/confirm_password_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:padding="12dp"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="16sp"
+        android:visibility="gone"
+        tools:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="14dp"
+        android:text="LOG IN"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="#C85353"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/signup_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="New user? Register Here"
+        android:textColor="#C85353"
+        android:textSize="14sp" />
+
+</LinearLayout>

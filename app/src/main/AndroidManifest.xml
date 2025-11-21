@@ -16,131 +16,60 @@
         android:roundIcon="@drawable/tara_kaon2"
         android:supportsRtl="true"
         android:theme="@style/Theme.IPT_FINAL_PROJECT">
+
         <activity
-            android:name=".UploadRecipes"
-            android:exported="false" />
-        <activity
-            android:name=".MyRecipes"
-            android:exported="false" />
-        <activity
-            android:name=".BukoPandan"
-            android:exported="false" />
-        <activity
-            android:name=".Halohalo"
-            android:exported="false" />
-        <activity
-            android:name=".LecheFlan"
-            android:exported="false" />
-        <activity
-            android:name=".TortangTalong"
-            android:exported="false" />
-        <activity
-            android:name=".Pinakbet"
-            android:exported="false" />
-        <activity
-            android:name=".Chopsuey"
-            android:exported="false" />
-        <activity
-            android:name=".KinulobItik"
-            android:exported="false" />
-        <activity
-            android:name=".DuckKaldereta"
-            android:exported="false" />
-        <activity
-            android:name=".RoastedDuck"
-            android:exported="false" />
-        <activity
-            android:name=".GrilledFish"
-            android:exported="false" />
-        <activity
-            android:name=".RellenongBangus"
-            android:exported="false" />
-        <activity
-            android:name=".Escabeche"
-            android:exported="false" />
-        <activity
-            android:name=".Bulalo"
-            android:exported="false" />
-        <activity
-            android:name=".Beefkare"
-            android:exported="false" />
-        <activity
-            android:name=".BistekTagalog"
-            android:exported="false" />
-        <activity
-            android:name=".PorkSinigang"
-            android:exported="false" />
-        <activity
-            android:name=".LechonKawali"
-            android:exported="false" />
-        <activity
-            android:name=".Porkbbq"
-            android:exported="false" />
-        <activity
-            android:name=".ChickenInasal"
-            android:exported="false" />
-        <activity
-            android:name=".TinolangManok"
-            android:exported="false" />
-        <activity
-            android:name=".ChickenCurry"
-            android:exported="false" />
-        <activity
-            android:name=".Chicken"
-            android:exported="false" />
-        <activity
-            android:name=".Fish"
-            android:exported="false" />
-        <activity
-            android:name=".Pork"
-            android:exported="false" />
-        <activity
-            android:name=".Beef"
-            android:exported="false" />
-        <activity
-            android:name=".Duck"
-            android:exported="false" />
-        <activity
-            android:name=".Vegetables"
-            android:exported="false" />
-        <activity
-            android:name=".Dessert"
-            android:exported="false" />
-        <activity
-            android:name=".ChickenAdobo"
-            android:exported="false" />
-        <activity
-            android:name=".Humba"
-            android:exported="false" />
-        <activity
-            android:name=".Patotin"
-            android:exported="false" />
-        <activity
-            android:name=".PataPorkBeans"
-            android:exported="false" />
-        <activity
-            android:name=".Sisig"
-            android:exported="false" />
-        <activity
-            android:name=".SinigangBangus"
-            android:exported="false" />
-        <activity
-            android:name=".BicolExpress"
-            android:exported="false" />
-        <activity
-            android:name=".GinaataangGulay"
-            android:exported="false" />
-        <activity
-            android:name=".RecipePage"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".RecipePage" android:exported="false" />
+
+        <activity android:name=".UploadRecipes" android:exported="false" />
+        <activity android:name=".MyRecipes" android:exported="false" />
+        <activity android:name=".BukoPandan" android:exported="false" />
+        <activity android:name=".Halohalo" android:exported="false" />
+        <activity android:name=".LecheFlan" android:exported="false" />
+        <activity android:name=".TortangTalong" android:exported="false" />
+        <activity android:name=".Pinakbet" android:exported="false" />
+        <activity android:name=".Chopsuey" android:exported="false" />
+        <activity android:name=".KinulobItik" android:exported="false" />
+        <activity android:name=".DuckKaldereta" android:exported="false" />
+        <activity android:name=".RoastedDuck" android:exported="false" />
+        <activity android:name=".GrilledFish" android:exported="false" />
+        <activity android:name=".RellenongBangus" android:exported="false" />
+        <activity android:name=".Escabeche" android:exported="false" />
+        <activity android:name=".Bulalo" android:exported="false" />
+        <activity android:name=".Beefkare" android:exported="false" />
+        <activity android:name=".BistekTagalog" android:exported="false" />
+        <activity android:name=".PorkSinigang" android:exported="false" />
+        <activity android:name=".LechonKawali" android:exported="false" />
+        <activity android:name=".Porkbbq" android:exported="false" />
+        <activity android:name=".ChickenInasal" android:exported="false" />
+        <activity android:name=".TinolangManok" android:exported="false" />
+        <activity android:name=".ChickenCurry" android:exported="false" />
+        <activity android:name=".Chicken" android:exported="false" />
+        <activity android:name=".Fish" android:exported="false" />
+        <activity android:name=".Pork" android:exported="false" />
+        <activity android:name=".Beef" android:exported="false" />
+        <activity android:name=".Duck" android:exported="false" />
+        <activity android:name=".Vegetables" android:exported="false" />
+        <activity android:name=".Dessert" android:exported="false" />
+        <activity android:name=".ChickenAdobo" android:exported="false" />
+        <activity android:name=".Humba" android:exported="false" />
+        <activity android:name=".Patotin" android:exported="false" />
+        <activity android:name=".PataPorkBeans" android:exported="false" />
+        <activity android:name=".Sisig" android:exported="false" />
+        <activity android:name=".SinigangBangus" android:exported="false" />
+        <activity android:name=".BicolExpress" android:exported="false" />
+        <activity android:name=".GinaataangGulay" android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
         </activity>
     </application>
 

@@ -2,12 +2,14 @@ package com.example.ipt_final_project
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -15,50 +17,51 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
+class RecipePage : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    lateinit var chickenAdobo: ImageView
+    lateinit var sisig: ImageView
+    lateinit var ginaataangGulay: ImageView
+    lateinit var humba: ImageView
+    lateinit var sinigangBangus: ImageView
+    lateinit var pataPorkBeans: ImageView
+    lateinit var bicolExpress: ImageView
+    lateinit var patotin: ImageView
+    lateinit var chicken: Button
+    lateinit var pork: Button
+    lateinit var fish: Button
+    lateinit var beef: Button
+    lateinit var duck: Button
+    lateinit var vegetables: Button
+    lateinit var desserts: Button
+    lateinit var menuButton: ImageButton
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navigationView: NavigationView
 
-class RecipePage : AppCompatActivity() {
-        lateinit var chickenAdobo: ImageView
-        lateinit var sisig: ImageView
-        lateinit var ginaataangGulay: ImageView
-        lateinit var humba: ImageView
-        lateinit var sinigangBangus: ImageView
-        lateinit var pataPorkBeans: ImageView
-        lateinit var bicolExpress: ImageView
-        lateinit var patotin: ImageView
-        lateinit var chicken: Button
-        lateinit var pork: Button
-        lateinit var fish: Button
-        lateinit var beef: Button
-        lateinit var duck: Button
-        lateinit var vegetables: Button
-        lateinit var desserts: Button
-        lateinit var menuButton: ImageButton
-        lateinit var drawerLayout: DrawerLayout
-        lateinit var navigationView: NavigationView
+    private lateinit var auth: FirebaseAuth
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_recipe_page)
 
+        auth = FirebaseAuth.getInstance()
 
+        val searchItems = listOf("Tinolang Manok", "Chicken Curry", "Chicken Inasal", "Pork Sinigang", "Pork Barbecue", "Lechon Kawali", "Bistek Tagalog", "Bulalo", "Beef Kare-Kare", "Rellenong Bangus", "Escabeche", "Grilled Fish", "Roasted Duck", "Duck Kaldereta", "Kinulob na Itik", "Chopsuey", "Pinakbet", "Tortang Talong", "Leche Flan", "Halo-Halo", "Buko Pandan")
+        val searchAutoComplete = findViewById<AutoCompleteTextView>(R.id.searchAutoComplete)
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            enableEdgeToEdge()
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_recipe_page)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, searchItems)
+        searchAutoComplete.setAdapter(adapter)
 
-            val searchItems = listOf("Tinolang Manok", "Chicken Curry", "Chicken Inasal", "Pork Sinigang", "Pork Barbecue", "Lechon Kawali", "Bistek Tagalog", "Bulalo", "Beef Kare-Kare", "Rellenong Bangus", "Escabeche", "Grilled Fish", "Roasted Duck", "Duck Kaldereta", "Kinulob na Itik", "Chopsuey", "Pinakbet", "Tortang Talong", "Leche Flan", "Halo-Halo", "Buko Pandan")
-            val searchAutoComplete = findViewById<AutoCompleteTextView>(R.id.searchAutoComplete)
-
-            val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, searchItems)
-            searchAutoComplete.setAdapter(adapter)
-
-            searchAutoComplete.setOnItemClickListener { parent, _, position, _ ->
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                when (selectedItem) {
+        searchAutoComplete.setOnItemClickListener { parent, _, position, _ ->
+            val selectedItem = parent.getItemAtPosition(position).toString()
+            when (selectedItem) {
                 "Chicken Curry" -> startActivity(Intent(this, ChickenCurry::class.java))
                 "Tinolang Manok" -> startActivity(Intent(this, TinolangManok::class.java))
                 "Chicken Inasal" -> startActivity(Intent(this, ChickenInasal::class.java))
-                "Pork Barbecue"  -> startActivity(Intent(this, Porkbbq::class.java))
+                "Pork Barbecue" -> startActivity(Intent(this, Porkbbq::class.java))
                 "Lechon Kawali" -> startActivity(Intent(this, LechonKawali::class.java))
                 "Pork Sinigang" -> startActivity(Intent(this, PorkSinigang::class.java))
                 "Bistek Tagalog" -> startActivity(Intent(this, BistekTagalog::class.java))
@@ -78,37 +81,28 @@ class RecipePage : AppCompatActivity() {
                 "Buko Pandan" -> startActivity(Intent(this, BukoPandan::class.java))
             }
 
-                searchAutoComplete.clearFocus()
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(searchAutoComplete.windowToken, 0)
+            searchAutoComplete.clearFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(searchAutoComplete.windowToken, 0)
+        }
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.nav_view_end)
+        menuButton = findViewById(R.id.menubutton)
+
+        menuButton.setOnClickListener {
+            if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.openDrawer(GravityCompat.END)
             }
+        }
 
+        navigationView.setNavigationItemSelectedListener(this)
 
-            drawerLayout = findViewById(R.id.drawer_layout)
-            val navigationView = findViewById<NavigationView>(R.id.nav_view_end)
-            menuButton = findViewById(R.id.menubutton)
-
-            menuButton.setOnClickListener {
-                if (!drawerLayout.isDrawerOpen(GravityCompat.END)) {
-                    drawerLayout.openDrawer(GravityCompat.END)
-                }
-            }
-                navigationView.setNavigationItemSelectedListener { item ->
-                    when (item.itemId) {
-                        R.id.my_recipes -> {
-                            startActivity(Intent(this, MyRecipes::class.java))
-                            true
-                        }
-                        else -> false
-                    }
-                }
-
-            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
-                insets
-            }
-
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
+            insets
+        }
 
         chicken = findViewById(R.id.chicken)
         chicken.setOnClickListener {
@@ -164,7 +158,7 @@ class RecipePage : AppCompatActivity() {
             startActivity(intent)
         }
 
-        ginaataangGulay= findViewById(R.id.ginataangGulay)
+        ginaataangGulay = findViewById(R.id.ginataangGulay)
         ginaataangGulay.setOnClickListener {
             val intent = Intent(this, GinaataangGulay::class.java)
             startActivity(intent)
@@ -198,6 +192,44 @@ class RecipePage : AppCompatActivity() {
         patotin.setOnClickListener {
             val intent = Intent(this, Patotin::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.my_recipes -> {
+                startActivity(Intent(this, MyRecipes::class.java))
+            }
+            R.id.nav_logout -> {
+                performLogout()
+                drawerLayout.closeDrawer(GravityCompat.END)
+                return true
+            }
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.END)
+        return true
+    }
+
+
+    private fun performLogout() {
+        auth.signOut()
+
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+
+        Toast.makeText(this, "Logged out successfully.", Toast.LENGTH_SHORT).show()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawer(GravityCompat.END)
+        } else {
+            super.onBackPressed()
         }
     }
 }
