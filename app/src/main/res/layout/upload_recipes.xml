@@ -11,45 +11,27 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Ipt_final_project.AppBarOverlay">
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_add_edit"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Ipt_final_project.PopupOverlay" />
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/view_image"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:background="#E0E0E0"
-                android:contentDescription="Recipe Image"
-                android:src="@drawable/img_placeholder" />
-
-            <Button
-                android:id="@+id/add_button"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Recipe Photo"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                app:icon="@drawable/add_photo" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -99,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:text="Save Recipe"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="@color/crimsonL"/>
+                android:backgroundTint="@color/crimson"/>
 
             <Button
                 android:id="@+id/delete_button"
@@ -107,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="Delete Recipe"
                 android:layout_marginTop="8dp"
-                android:backgroundTint="@color/crimsonL"
+                android:backgroundTint="@color/crimson"
                 android:visibility="gone"
                 tools:visibility="visible"/>
 

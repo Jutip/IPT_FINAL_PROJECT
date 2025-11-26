@@ -1,53 +1,32 @@
 package com.example.ipt_final_project
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import java.util.UUID
-import java.io.FileNotFoundException
 
 class UploadRecipes : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private val recipeCollection = db.collection("recipes")
-    private val storage = FirebaseStorage.getInstance()
 
     private lateinit var titleInput: TextInputEditText
     private lateinit var ingredientsInput: TextInputEditText
     private lateinit var instructionsInput: TextInputEditText
     private lateinit var saveButton: Button
     private lateinit var deleteButton: Button
-    private lateinit var recipeImageView: ImageView
-    private lateinit var addImageButton: Button
-    private var currentRecipe: Recipe? = null
-    private var selectedImageUri: Uri? = null
-    private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
-    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
-    private fun showSnack(message: String) {
-       val snack = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_INDEFINITE)
-        snack.show()
-        snack.view.postDelayed({
-            snack.dismiss()
-        }, 1500)
-    }
 
+    private var currentRecipe: Recipe? = null
+
+    private fun showSnack(message: String) {
+        val rootView = findViewById<View>(android.R.id.content)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_SHORT).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,14 +37,10 @@ class UploadRecipes : AppCompatActivity() {
         instructionsInput = findViewById(R.id.edit_text_instructions)
         saveButton = findViewById(R.id.save_button)
         deleteButton = findViewById(R.id.delete_button)
-        recipeImageView = findViewById(R.id.view_image)
-        addImageButton = findViewById(R.id.add_button)
 
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_add_edit)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        setupActivityLaunchers()
 
         if (intent.hasExtra("RECIPE_DATA")) {
             currentRecipe =
@@ -83,50 +58,8 @@ class UploadRecipes : AppCompatActivity() {
             deleteButton.visibility = View.GONE
         }
 
-        addImageButton.setOnClickListener { checkPermissionAndOpenGallery() }
         saveButton.setOnClickListener { saveRecipe() }
         deleteButton.setOnClickListener { deleteRecipe() }
-    }
-
-    private fun setupActivityLaunchers() {
-        pickImageLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK && result.data != null) {
-                    selectedImageUri = result.data?.data
-                    Glide.with(this)
-                        .load(selectedImageUri)
-                        .placeholder(R.drawable.img_placeholder)
-                        .into(recipeImageView)
-                }
-            }
-
-        requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                if (isGranted) {
-                    openGallery()
-                } else {
-                    showSnack("Permission denied to read storage")
-                }
-            }
-    }
-
-    private fun checkPermissionAndOpenGallery() {
-        val permission =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.READ_MEDIA_IMAGES
-            else Manifest.permission.READ_EXTERNAL_STORAGE
-
-        when {
-            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED ->
-                openGallery()
-
-            else -> requestPermissionLauncher.launch(permission)
-        }
-    }
-
-    private fun openGallery() {
-        val intent =
-            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        pickImageLauncher.launch(intent)
     }
 
     private fun fillUiWithRecipeData() {
@@ -135,13 +68,6 @@ class UploadRecipes : AppCompatActivity() {
             ingredientsInput.setText(it.ingredients)
             instructionsInput.setText(it.instructions)
             deleteButton.visibility = View.VISIBLE
-
-            if (!it.imageUrl.isNullOrEmpty()) {
-                Glide.with(this)
-                    .load(it.imageUrl)
-                    .placeholder(R.drawable.img_placeholder)
-                    .into(recipeImageView)
-            }
         }
     }
 
@@ -157,66 +83,24 @@ class UploadRecipes : AppCompatActivity() {
 
         saveButton.isEnabled = false
 
-        if (selectedImageUri != null) {
-            uploadImageAndSaveRecipe(title, ingredients, instructions)
-        } else {
-            saveRecipeToFirestore(title, ingredients, instructions, currentRecipe?.imageUrl)
-        }
-    }
-
-    private fun uploadImageAndSaveRecipe(
-        title: String,
-        ingredients: String,
-        instructions: String
-    ) {
-        val filename = UUID.randomUUID().toString()
-        val storageRef = storage.reference.child("recipe_images/$filename")
-
-        selectedImageUri?.let { uri ->
-            try {
-                contentResolver.openInputStream(uri)?.close()
-                storageRef.putFile(uri)
-                    .addOnSuccessListener {
-                        storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                            saveRecipeToFirestore(
-                                title,
-                                ingredients,
-                                instructions,
-                                downloadUri.toString()
-                            )
-                        }
-                    }
-                    .addOnFailureListener { e ->
-                        showSnack("Image upload failed: ${e.message}")
-                        saveButton.isEnabled = true
-                    }
-            } catch (e: FileNotFoundException) {
-                showSnack("Error: Selected image not found. Please pick another.")
-                saveButton.isEnabled = true
-            } catch (e: Exception) {
-                showSnack("Error: ${e.message}")
-                saveButton.isEnabled = true
-            }
-        }
+        saveRecipeToFirestore(title, ingredients, instructions)
     }
 
     private fun saveRecipeToFirestore(
         title: String,
         ingredients: String,
-        instructions: String,
-        imageUrl: String?
+        instructions: String
     ) {
-        val recipeToSave = currentRecipe?.apply {
-            this.title = title
-            this.ingredients = ingredients
-            this.instructions = instructions
-            this.imageUrl = imageUrl ?: this.imageUrl
-        }  ?: Recipe(
+        val recipeToSave = currentRecipe?.copy(
+            title = title,
+            ingredients = ingredients,
+            instructions = instructions
+        ) ?: Recipe(
             id = null,
             title = title,
             ingredients = ingredients,
             instructions = instructions,
-            imageUrl = imageUrl
+            imageUrl = null
         )
 
         if (recipeToSave.id == null) {
@@ -244,16 +128,7 @@ class UploadRecipes : AppCompatActivity() {
 
     private fun deleteRecipe() {
         currentRecipe?.id?.let { id ->
-
-            currentRecipe?.imageUrl?.let { url ->
-                if (url.isNotEmpty() && url.startsWith("https://firebasestorage.googleapis.com")) {
-                    try {
-                        storage.getReferenceFromUrl(url).delete()
-                    } catch (e: Exception) {
-                        Log.e("UploadRecipes", "Error deleting image from Storage: ${e.message}")
-                    }
-                }
-            }
+            deleteButton.isEnabled = false
 
             recipeCollection.document(id).delete()
                 .addOnSuccessListener {
@@ -262,12 +137,16 @@ class UploadRecipes : AppCompatActivity() {
                 }
                 .addOnFailureListener { e ->
                     showSnack("Error: ${e.message}")
+                    deleteButton.isEnabled = true
                 }
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressedDispatcher.onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -11,14 +11,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Ipt_final_project.AppBarOverlay">
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_my_recipes"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Ipt_final_project.PopupOverlay" />
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,4 +37,5 @@
         android:layout_margin="16dp"
         android:contentDescription="Add New Recipe"
         app:srcCompat="@drawable/rounded_add_circle_24"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
