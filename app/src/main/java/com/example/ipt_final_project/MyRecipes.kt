@@ -64,15 +64,26 @@ class MyRecipes : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
+                val position = viewHolder.bindingAdapterPosition
 
-                val recipeId = adapter?.snapshots?.getSnapshot(position)?.id
+                if (position == RecyclerView.NO_POSITION) {
+                    return
+                }
+
+                val snapshot = adapter?.snapshots?.getSnapshot(position)
+                val recipeId = snapshot?.id
 
                 if (recipeId != null) {
                     recipeCollection.document(recipeId).delete()
                         .addOnSuccessListener {
                             Toast.makeText(this@MyRecipes, "Recipe deleted", Toast.LENGTH_SHORT).show()
                         }
+                        .addOnFailureListener {
+                            adapter?.notifyItemChanged(position)
+                            Toast.makeText(this@MyRecipes, "Failed to delete recipe.", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    adapter?.notifyItemChanged(position)
                 }
             }
         }).attachToRecyclerView(recyclerView)
@@ -82,6 +93,7 @@ class MyRecipes : AppCompatActivity() {
         val title: TextView = view.findViewById(R.id.text_view_title)
         val timestamp: TextView = view.findViewById(R.id.text_view_timestamp)
     }
+
     private inner class RecipeAdapter(options: FirestoreRecyclerOptions<Recipe>) :
         FirestoreRecyclerAdapter<Recipe, RecipeViewHolder>(options) {
 
@@ -96,28 +108,36 @@ class MyRecipes : AppCompatActivity() {
         override fun onBindViewHolder(holder: RecipeViewHolder, position: Int, model: Recipe) {
             holder.title.text = model.title
             holder.timestamp.text = model.timestamp?.let { dateFormat.format(it) } ?: "No date"
-            holder.itemView.setOnClickListener {
 
+            val snapshot = snapshots.getSnapshot(position)
+
+            if (!snapshot.exists()) {
+                holder.itemView.setOnClickListener(null)
+                return
+            }
+
+            holder.itemView.setOnClickListener {
                 val intent = Intent(this@MyRecipes , UploadRecipes::class.java)
 
-                val recipeId = snapshots.getSnapshot(position).id
+                val recipeId = snapshot.id
                 model.id = recipeId
+
                 intent.putExtra("RECIPE_DATA", model)
                 startActivity(intent)
             }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+
+    override fun onResume() {
+        super.onResume()
         adapter?.startListening()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         adapter?.stopListening()
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()

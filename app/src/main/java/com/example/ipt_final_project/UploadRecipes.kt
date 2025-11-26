@@ -1,5 +1,6 @@
 package com.example.ipt_final_project
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -107,7 +108,7 @@ class UploadRecipes : AppCompatActivity() {
             recipeCollection.add(recipeToSave)
                 .addOnSuccessListener {
                     showSnack("Recipe saved!")
-                    finish()
+                    navigateToMyRecipes()
                 }
                 .addOnFailureListener { e ->
                     showSnack("Error: ${e.message}")
@@ -117,7 +118,7 @@ class UploadRecipes : AppCompatActivity() {
             recipeCollection.document(recipeToSave.id!!).set(recipeToSave)
                 .addOnSuccessListener {
                     showSnack("Recipe updated!")
-                    finish()
+                    navigateToMyRecipes()
                 }
                 .addOnFailureListener { e ->
                     showSnack("Error: ${e.message}")
@@ -133,13 +134,23 @@ class UploadRecipes : AppCompatActivity() {
             recipeCollection.document(id).delete()
                 .addOnSuccessListener {
                     showSnack("Recipe deleted")
-                    finish()
+                    navigateToMyRecipes()
                 }
                 .addOnFailureListener { e ->
                     showSnack("Error: ${e.message}")
                     deleteButton.isEnabled = true
                 }
         }
+    }
+
+    // ⭐ New function to forcefully navigate back and clear the broken stack
+    private fun navigateToMyRecipes() {
+        val intent = Intent(this, MyRecipes::class.java)
+        // These flags ensure that MyRecipes is brought to the top and all other
+        // Activities (which might be crashing) are cleared from the stack.
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        finish() // Close the current UploadRecipes Activity
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
